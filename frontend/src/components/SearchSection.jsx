@@ -8,7 +8,7 @@ function SearchSection() {
     const[search, setSearch] = useState("");
     console.log(search)
   return (
-    <div id="aboutUs" className="w-full relative min-h-screen overflow-hidden flex  text-center">
+    <div id="aboutUs" className="w-full relative min-h-155 md:min-h-screen overflow-hidden flex  text-center">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full bg-cover bg-center">
         <img

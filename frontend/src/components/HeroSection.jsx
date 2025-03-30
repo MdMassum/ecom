@@ -6,7 +6,7 @@ import man from "../assets/9.png";
 
 function HeroSection() {
   return (
-    <div id="home" className="relative w-full min-h-screen overflow-hidden">
+    <div id="home" className="relative w-full min-h-160 md:min-h-screen overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-cover bg-center">
         <img
           src={bgImage}

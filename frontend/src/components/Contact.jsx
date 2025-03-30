@@ -9,7 +9,7 @@ const Contact = () => {
 
     <div
       id="contactUs"
-      className="relative w-full md:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-8 md:py-6 overflow-hidden min-h-screen"
+      className="relative w-full md:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-3 md:py-6 overflow-hidden min-h-155 md:min-h-screen"
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full bg-cover bg-center z-0">
@@ -25,8 +25,8 @@ const Contact = () => {
       <div className="relative md:ml-28 z-10 flex flex-col w-full text-blue-900 text-left">
         <div className="w-full flex items-center mb-7 md:mb-16">
           <div className="flex flex-row md:flex-col tracking-wider items-center justify-center md:justify-start gap-2 md:gap-0 font-bold">
-            <h2 className="text-5xl md:text-8xl text-left md:-ml-8 text-stroke">Get in</h2>
-            <h2 className="text-5xl md:text-8xl text-stroke">touch!</h2>
+            <h2 className="text-7xl md:text-8xl text-left md:-ml-8 text-stroke">Get in</h2>
+            <h2 className="text-7xl md:text-8xl text-stroke">touch!</h2>
           </div>
         </div>
 
