@@ -8,8 +8,7 @@ function ProductCard({ product }) {
       </div>
       <div className="flex justify-between font-bold text-lg">
         <span>{product?.name}</span>
-        <span>Price</span>
-        {/* <span>${product?.price}</span> */}
+        <span>₹{product?.price}</span>
       </div>
       <div className="flex items-center justify-between gap-2 mt-1">
         <p className="text-sm opacity-80 w-full truncate">

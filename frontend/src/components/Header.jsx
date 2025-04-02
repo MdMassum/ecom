@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { FiMenu, FiX } from "react-icons/fi";
-import { IoCartSharp } from "react-icons/io5";
+// import { IoCartSharp } from "react-icons/io5";
+import { IoPersonCircle  } from "react-icons/io5";
 import {useSelector} from 'react-redux'
 
 
@@ -42,8 +43,8 @@ const Header = () => {
               </HashLink>
             ))}
             {(currentUser && currentUser.role === 'user') ? 
-            <a href='/me/cart' className=" flex gap-1 items-center justify-center uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
-                <IoCartSharp size={20}/> Cart
+            <a href='/me' className=" flex gap-1 items-center justify-center uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
+                <IoPersonCircle  size={28}/> 
             </a> : <a href='/login' className="uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
                 Login</a>
               }

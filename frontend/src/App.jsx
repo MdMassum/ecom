@@ -11,10 +11,11 @@ import AdminRoute from "./components/admin/AdminRoute";
 import SellerRoute from "./components/seller/SellerRoute";
 import SellerLayout from "./layout/SellerLayout";
 import AdminLayout from "./layout/DashboardLayout";
-import Cart from "./pages/Cart";
+import Profile from "./pages/Profile";
 import AllSellers from "./pages/admin/AllSellers";
 import AllUsers from "./pages/admin/AllUsers";
 import ProductDetails from "./pages/ProductDetails";
+import UserAuthRoute from "./components/UserAuthRoute";
 
 function Layout({ children }) {
   return (
@@ -31,22 +32,12 @@ function App() {
     <BrowserRouter>
     <Routes>
       {/* Public Routes */}
-      <Route path="/" element={
-          <Layout>
-            <Home />
-          </Layout>
-      }/>
-      <Route path="/me/cart" element={
-          <Layout>
-            <Cart />
-          </Layout>
-      }/>
-      <Route
-        path="/product/:id" element={
-          <Layout>
-            <ProductDetails />
-          </Layout>
-      }/>
+      <Route path="/" element={<Layout> <Home /> </Layout>}/>
+      <Route path="/product/:id" element={<Layout> <ProductDetails /> </Layout>}/>
+      
+      <Route element={<UserAuthRoute />}>
+        <Route path="/me" element={<Layout> <Profile /> </Layout>}/>
+      </Route>
 
       
       <Route path="/login" element={<Login />} />

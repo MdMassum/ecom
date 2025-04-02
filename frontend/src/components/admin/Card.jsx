@@ -33,8 +33,8 @@ function Card({product, setProducts}) {
         <img src={product?.images[0]} alt={product?.name} />
       </div>
       <div className="flex justify-between font-bold text-lg mt-12">
-        <span>{product?.name}</span>
-        <span>${product?.price}</span>
+        <span>{product?.name}</span> 
+        <span>₹{product?.price}</span>
       </div>
       <p className="text-sm">Sold By: {product?.seller?.name  || 'unknown'}</p>
       <div className="flex items-center justify-between gap-2 mt-1">
