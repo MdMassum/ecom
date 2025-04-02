@@ -20,7 +20,7 @@ function SearchSection() {
 
       {/* Heading */}
       <div className="z-50 flex justify-center text-center text-blue-900 font-bold text-2xl md:text-4xl lg:text-5xl pt-10 w-full">
-        <p className="md:w-[80%]">400+ <span className="text-orange-500 text-stroke">IND</span><span className="text-green-500 text-stroke">IAN</span> PRODUCTS ON YOUR FINGERTIPS</p>
+        <p className="md:w-[80%]">400+ <span className="text-orange-500 md:text-stroke">IND</span><span className="text-green-500 md:text-stroke">IAN</span> PRODUCTS ON YOUR FINGERTIPS</p>
         {/* <p>FINGERTIPS</p> */}
       </div>
 

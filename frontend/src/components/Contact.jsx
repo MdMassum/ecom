@@ -17,16 +17,16 @@ const Contact = () => {
       </div>
 
       {/* Contact Image Section */}
-      <div className="relative flex items-center justify-center w-92 md:min-w-lg">
+      <div className="relative flex items-center justify-center w-92 md:min-w-[550px]">
         <img src={contact} alt="Contact" className="w-full" />
       </div>
 
       {/* Contact Details Section */}
       <div className="relative md:ml-28 z-10 flex flex-col w-full text-blue-900 text-left">
-        <div className="w-full flex items-center mb-7 md:mb-16">
+        <div className="w-full flex items-center mb-7 md:mb-12">
           <div className="flex flex-row md:flex-col tracking-wider items-center justify-center md:justify-start gap-2 md:gap-0 font-bold">
-            <h2 className="text-6xl md:text-8xl text-left md:-ml-8 text-stroke">Get in</h2>
-            <h2 className="text-6xl md:text-8xl text-stroke">touch!</h2>
+            <h2 className="text-6xl md:text-8xl text-left md:-ml-8 md:md:text-stroke">Get in</h2>
+            <h2 className="text-6xl md:text-8xl md:md:text-stroke md:-mt-3">touch!</h2>
           </div>
         </div>
 

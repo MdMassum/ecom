@@ -33,9 +33,9 @@ function ProductSection() {
 
         <div className='z-30 w-full tracking-wide md:tracking-wider relative top-10 md:top-6 flex flex-col text-4xl md:text-5xl items-center justify-center gap-3 mb-20'>
         <p className='flex gap-3'>
-            <span className='font-bold text-orange-500 text-stroke'>MADE</span>
-            <span className='font-bold text-blue-900 text-stroke'>IN</span>
-            <span className='font-bold text-green-500 text-stroke'>INDIA</span>
+            <span className='font-bold text-orange-500 md:text-stroke'>MADE</span>
+            <span className='font-bold text-blue-900 md:text-stroke'>IN</span>
+            <span className='font-bold text-green-500 md:text-stroke'>INDIA</span>
         </p>
         <p className='font-bold text-blue-900'>PRODUCTS</p>
         </div>
