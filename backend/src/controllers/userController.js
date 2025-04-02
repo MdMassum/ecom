@@ -9,7 +9,7 @@ const crypto = require('crypto')
 
 // creating a user --> Register
 exports.registerUser = catchAsyncError(async (req, res, next) => {
-    const { name, email, password, avatar, role, storeName, storeDescription } = req.body;
+    const { name, email, password, phone, avatar, role, storeName, storeDescription, storeAddress, gstNumber, businessType } = req.body;
 
     if (!["user", "seller"].includes(role)) {
         return next(new Errorhandler("Role should be either 'user' or 'seller'", 402));
@@ -19,9 +19,10 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
         name,
         email,
         password,
+        phone,
         avatar: avatar || "sampleurl",
         role,
-        sellerInfo: role === "seller" ? { storeName, storeDescription } : undefined
+        sellerInfo: role === "seller" ? { storeName, storeDescription, storeAddress, gstNumber, businessType } : undefined
     });
 
     sendToken(user, 201, res);

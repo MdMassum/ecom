@@ -7,7 +7,7 @@ const cloudinary = require('../config/cloudinary')
 exports.createProduct = catchAsyncError(async(req,res) =>{
 
     // assigning value of req.body.user as the id of loggedin user (i.e id of logged in user will be req.user.id)
-    user = req.user.id;
+    const seller = req.user.id;
     const { name, description, price, stock } = req.body;
 
     const images = req.files ? req.files.map((file) => file.path) : [];
@@ -19,7 +19,7 @@ exports.createProduct = catchAsyncError(async(req,res) =>{
         });
     }
 
-    const product = await Product.create({ name, description, price, user, images, stock});
+    const product = await Product.create({ name, description, price, seller, images, stock});
 
     res.status(201).json({
         success:true,
@@ -50,7 +50,8 @@ exports.getAllProducts = catchAsyncError(async(req,res) =>{
 
 // get all products of seller
 exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
-    const { sellerId } = req.params;  // Get sellerId from route params
+    const { sellerId } = req.params;
+    console.log(sellerId)
 
     if (!sellerId) {
         return next(new Errorhandler("Seller ID is required", 400));
@@ -74,7 +75,7 @@ exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
 
 // Get product details
 exports.getProductDetails=catchAsyncError(async(req,res,next)=>{
-    let product = await Product.findById(req.params.id);
+    let product = await Product.findById(req.params.id).populate('seller');
     
     if(!product){
         return next(new Errorhandler("Product Not Found",404));

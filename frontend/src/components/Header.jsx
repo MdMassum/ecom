@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HashLink } from "react-router-hash-link";
 import { FiMenu, FiX } from "react-icons/fi";
+import { IoCartSharp } from "react-icons/io5";
+import {useSelector} from 'react-redux'
 
 
 export const navItems = [
@@ -8,11 +10,14 @@ export const navItems = [
   { label: "ABOUT US", href: "#aboutUs" },
   { label: "Proudcts", href: "#product" },
   { label: "CONTACT US", href: "#contactUs" },
-  // { label: "Enquiry", href: "#" },
 ];
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  useEffect(()=>{
+
+  },[currentUser])
 
   return (
     <header className="absolute top-0 left-0 w-full bg-white/20 z-50">
@@ -25,9 +30,8 @@ const Header = () => {
         </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex space-x-16">
-          {navItems.map((navItem) =>
-            navItem.href.startsWith("#") ? (
+        <nav className="hidden md:flex space-x-10">
+          {navItems.map((navItem) =>(
               <HashLink
                 key={navItem.label}
                 smooth
@@ -36,16 +40,13 @@ const Header = () => {
               >
                 {navItem.label}
               </HashLink>
-            ) : (
-              <a
-                key={navItem.label}
-                href={navItem.href}
-                className="uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition"
-              >
-                {navItem.label}
-              </a>
-            )
-          )}
+            ))}
+            {(currentUser && currentUser.role === 'user') ? 
+            <a href='/me/cart' className=" flex gap-1 items-center justify-center uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
+                <IoCartSharp size={20}/> Cart
+            </a> : <a href='/login' className="uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
+                Login</a>
+              }
         </nav>
 
         {/* Mobile Menu Button */}

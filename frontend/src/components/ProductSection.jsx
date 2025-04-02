@@ -1,15 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import bgImage from '../assets/4.png'
 import ProductCard from './ProductCard'
-
-const products = [
-    {images:'#', name:"product name", description:"dkfdlf ldfjf dlfjd fdjfdk"},
-    {images:'#', name:"product name", description:"dkfdlf ldfjf dlfjd fdjfdk"},
-    {images:'#', name:"product name", description:"dkfdlf ldfjf dlfjd fdjfdk"},
-    {images:'#', name:"product name", description:"dkfdlf ldfjf dlfjd fdjfdk"},
-]
+import axios from 'axios';
 
 function ProductSection() {
+
+    const [products, setProducts] = useState([]);
+
+    const fetchProduct = async() =>{
+  
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/products`,
+        { withCredentials: true })
+  
+        if(response?.data?.success === true){
+          setProducts(response.data.products)
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  
+    useEffect(() => {
+      fetchProduct();
+    }, [products])
+
   return (
     <div id='product' className='relative w-full min-h-screen md:py-10'>
         <div className="absolute inset-0 w-full h-full bg-cover bg-center">

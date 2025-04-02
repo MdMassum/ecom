@@ -5,7 +5,7 @@ const router = express.Router();
 const upload = require('../middleware/fileUpload')
 
 // create product --> Admin access
-router.post('/product/new',isAuthenticatedUser,authorizeRoles("admin"),upload.array("images", 10),createProduct)
+router.post('/product/new',isAuthenticatedUser,authorizeRoles("seller"),upload.array("images", 10),createProduct)
 
 // get single Product details
 router.get('/product/:id',getProductDetails);
@@ -14,14 +14,14 @@ router.get('/product/:id',getProductDetails);
 router.get('/products',getAllProducts);
 
 // getting all products of seller
-router.get('/seller/products/:sellerId',getSellerProducts);
+router.get('/seller/products/:sellerId',isAuthenticatedUser,authorizeRoles("seller","admin"),getSellerProducts);
 
 // update the product  -- Admin
 // router.route("/product/:id").put(updateProduct).delete(deleteProduct);
-router.put('/product/:id',isAuthenticatedUser,authorizeRoles("admin"),updateProduct);
+router.put('/product/:id',isAuthenticatedUser,authorizeRoles("seller","admin"),updateProduct);
 
 // delete the product -- Admin
-router.delete('/product/:id',isAuthenticatedUser,authorizeRoles("admin"),deleteProduct);
+router.delete('/product/:id',isAuthenticatedUser,authorizeRoles("seller","admin"),deleteProduct);
 
 // creating and updating review -->
 router.put('/review',isAuthenticatedUser,createProductReview);

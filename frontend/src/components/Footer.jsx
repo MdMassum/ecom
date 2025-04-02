@@ -17,9 +17,10 @@ export default function Footer() {
     { label: "HOME", href: "#home", icon: <HiOutlineHome /> },
     { label: "ABOUT US", href: "#aboutUs", icon: <FaMapMarkerAlt /> },
     { label: "PRODUCTS", href: "#product", icon: <MdOutlineCategory /> },
-    { label: "CONTACT US", href: "#contactUs", icon: <HiOutlineMail /> },
+    // { label: "CONTACT US", href: "#contactUs", icon: <HiOutlineMail /> },
     // { label: "ENQUIRY", href: "/enquiry", icon: <HiOutlineMail /> },
-    // { label: "ADMIN LOGIN", href: "/admin/login", icon: <MdLogin /> },
+    { label: "LOGIN", href: "/login", icon: <MdLogin /> },
+    { label: "REGISTER", href: "/signup/user", icon: <MdLogin /> }
   ];
 
   return (

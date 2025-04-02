@@ -41,6 +41,9 @@ const UsersSchema = new mongoose.Schema({
     sellerInfo: {
       storeName: { type: String },
       storeDescription: { type: String },
+      storeAddress: { type: String },
+      gstNumber: { type: String },
+      businessType: { type: String, enum: ["Retail", "Wholesale", "E-commerce"] },
     },
 
     resetPasswordToken:String,

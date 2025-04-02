@@ -12,7 +12,7 @@ class ApiFeatures{
 
         }:{}
         // console.log(keyword);
-        this.query = this.query.find({...keyword});
+        this.query = this.query.find({...keyword}).populate('seller');
         return this;
     }
 
