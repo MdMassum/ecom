@@ -14,6 +14,7 @@ import AdminLayout from "./layout/DashboardLayout";
 import Cart from "./pages/Cart";
 import AllSellers from "./pages/admin/AllSellers";
 import AllUsers from "./pages/admin/AllUsers";
+import ProductDetails from "./pages/ProductDetails";
 
 function Layout({ children }) {
   return (
@@ -40,12 +41,12 @@ function App() {
             <Cart />
           </Layout>
       }/>
-      {/* <Route
+      <Route
         path="/product/:id" element={
           <Layout>
             <ProductDetails />
           </Layout>
-      }/> */}
+      }/>
 
       
       <Route path="/login" element={<Login />} />

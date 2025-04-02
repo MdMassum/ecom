@@ -12,7 +12,7 @@ const order = require('../src/routes/orderRoute')
 
 const app = express();
 const bodyparser = require('body-parser');
-console.log(process.env.FRONTEND_URL)
+
 app.use(cors({
     origin:process.env.FRONTEND_URL,
     methods: ["GET", "POST", "DELETE", "PUT"],

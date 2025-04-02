@@ -20,8 +20,8 @@ const UsersSchema = new mongoose.Schema({
     password:{
         type:String,
         required:[true,"Enter Your Password"],
-        minLength:[8,"Password should be atleast 8 characters"],
-        select:false,  // while using find() this will not be selected
+        minLength:[6,"Password should be atleast 6 characters"],
+        select:false,
 
     },
     avatar:{

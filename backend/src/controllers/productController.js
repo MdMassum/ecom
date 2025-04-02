@@ -51,7 +51,6 @@ exports.getAllProducts = catchAsyncError(async(req,res) =>{
 // get all products of seller
 exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
     const { sellerId } = req.params;
-    console.log(sellerId)
 
     if (!sellerId) {
         return next(new Errorhandler("Seller ID is required", 400));

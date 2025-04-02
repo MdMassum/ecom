@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FiLoader, FiTrash2 } from 'react-icons/fi';
+import { FiEdit, FiLoader, FiTrash2 } from 'react-icons/fi';
 import toast from "react-hot-toast";
+import UpdateUserModal from '../../components/UpdateUserModal';
 
 function AllUsers() {
 
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
+  const [editingUser, setEditingUser] = useState(null);
 
   const fetchUsers = async () => {
     setLoading(true);
@@ -85,7 +87,13 @@ function AllUsers() {
                   <td className="p-3">{user.email}</td>
                   <td className="p-3">{user.phone}</td>
                   <td className="p-3">{user.createdAt.split('T')[0]}</td>
-                  <td className="p-3 text-center">
+                  <td className="p-3 text-center flex justify-center gap-4">
+                  <button
+                      onClick={() => setEditingUser(user)}
+                      className="text-blue-500 hover:text-blue-700 focus:outline-none cursor-pointer"
+                    >
+                      <FiEdit />
+                    </button>
                     <button
                       onClick={() => handleDelete(user._id)}
                       className="text-red-500 hover:text-red-700 focus:outline-none cursor-pointer"
@@ -103,6 +111,13 @@ function AllUsers() {
             </tbody>
           </table>
         </div>
+      )}
+      {editingUser && (
+        <UpdateUserModal
+          user={editingUser}
+          onClose={() => setEditingUser(null)}
+          onUpdate={fetchUsers}
+        />
       )}
     </div>
   );

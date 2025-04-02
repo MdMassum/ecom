@@ -108,9 +108,7 @@ exports.resetPassword = catchAsyncError(async(req,res,next)=>{
     .update(req.params.token)
     .digest("hex")
 
-    const user = await User.findOne({resetPasswordToken:resetPasswordToken})
-
-    console.log(user);
+    const user = await User.findOne({resetPasswordToken:resetPasswordToken});
 
     if(!user){
         return next(new Errorhandler("Reset Password Token is invalid or has Expired",400));
@@ -216,29 +214,29 @@ exports.getSingleUser = catchAsyncError(async(req,res,next)=>{
     })
 })
 
-// update user role - Admin -->
-exports.updateUserRole = catchAsyncError(async(req,res,next)=>{
+// update user role,profile and password - Admin -->
+exports.updateUserRole = catchAsyncError(async (req, res, next) => {
 
-    const newUser = {
-        name:req.body.name,
-        email:req.body.email,
-        role:req.body.role
-    }
+    const { name, role, phone, password } = req.body;
     const user = await User.findById(req.params.id);
-    if(!user){
-        return next(new Errorhandler(`User does not exists with id ${req.params.id}`,404))
+
+    if (!user) {
+        return next(new Errorhandler(`User does not exist with id ${req.params.id}`, 404));
     }
 
-    await User.findByIdAndUpdate(user.id,newUser,{
-        new:true,
-        runValidators:true,
-        useFindAndModify:false
-    })
+    // Update user fields dynamically
+    if (name) user.name = name;
+    if (role) user.role = role;
+    if (phone) user.phone = phone;
+    if (password) user.password = password;
+
+    await user.save();
+
     res.status(200).json({
-        success:true,
-        message:"Profile Updated Successfully"
-    })
-})
+        success: true,
+        message: "Profile updated successfully",
+    });
+});
 
 // Delete user - Admin -->
 exports.deleteUser = catchAsyncError(async(req,res,next)=>{

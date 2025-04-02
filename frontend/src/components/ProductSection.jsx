@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import bgImage from '../assets/4.png'
 import ProductCard from './ProductCard'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 function ProductSection() {
 
@@ -43,7 +44,9 @@ function ProductSection() {
         <div className='w-full relative z-30 flex flex-wrap items-center justify-center gap-10 pb-8'>
             {
                 products.map((product,idx)=>(
-                    <ProductCard product={product} key={`${product.name}-${idx}`}/>
+                  <Link key={product._id} to={`/product/${product._id}`}>
+                    <ProductCard key={`${product.name}-${idx}`} product={product} />
+                  </Link> 
                 ))
             }
         </div>

@@ -20,7 +20,7 @@ const Header = () => {
   },[currentUser])
 
   return (
-    <header className="absolute top-0 left-0 w-full bg-white/20 z-50">
+    <header className="absolute top-0 left-0 w-full bg-white/20 shadow-sm z-50">
       <div className="max-w-[84%] mx-auto flex items-center justify-between py-5">
         <div className="flex gap-2 pr-2 -ml-4 md:ml-0">
           <span className=" text-black text-3xl">THE</span>
