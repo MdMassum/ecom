@@ -1,8 +1,8 @@
 import React from "react";
-import bgImage from "../assets/4.png";
-import img2 from "../assets/5.png";
-import logo from "../assets/logo-demo1.png";
-import man from "../assets/9.png";
+import bgImage from "../../../assets/4.png";
+import img2 from "../../../assets/5.png";
+import logo from "../../../assets/logo-demo1.png";
+import man from "../../../assets/9.png";
 
 function HeroSection() {
   return (

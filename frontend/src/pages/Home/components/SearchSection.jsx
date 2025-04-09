@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import bgImage from '../assets/4.png';
-import img2 from '../assets/5.png';
-import woman from '../assets/woman.png';
+import bgImage from '../../../assets/4.png';
+import img2 from '../../../assets/5.png';
+import woman from '../../../assets/woman.png';
+import {useNavigate} from 'react-router-dom'
 import { FiSearch } from "react-icons/fi";
 
 function SearchSection() {
     const[search, setSearch] = useState("");
+    const navigate = useNavigate()
     console.log(search)
   return (
     <div id="aboutUs" className="w-full relative min-h-[667px] md:min-h-screen overflow-hidden flex  text-center">
@@ -33,11 +35,13 @@ function SearchSection() {
           id="search"
           value={search}
           placeholder="Search here....." 
-          className="w-full bg-transparent outline-none text-white text-lg px-2"
+          className="w-full bg-transparent outline-none text-black text-lg px-2"
         />
         </div>
         
-        <button className="bg-blue-900 text-white px-8 py-2 rounded-full text-xl font-semibold cursor-pointer">Search</button>
+        <button 
+        onClick={()=>navigate(`/search?searchKey=${search}`)}
+        className="bg-blue-900 text-white px-8 py-2 rounded-full text-xl font-semibold cursor-pointer hover:bg-blue-950">Search</button>
       </div>
 
       {/* Woman Illustration */}

@@ -54,7 +54,7 @@ const SellerDashboard = () => {
         >
           Add Product
         </button>
-        {isOpen && <AddProductModal setIsOpen={setIsOpen} products={products} setProducts={setProducts} fetchProduct={fetchProduct} />}
+        {isOpen && <AddProductModal setIsOpen={setIsOpen} products={products} setProducts={setProducts} fetchProduct={fetchProduct} />} 
       </div>
 
       {loading ? (

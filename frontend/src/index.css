@@ -2,3 +2,6 @@
 .text-stroke {
     -webkit-text-stroke: 1px white; /* Border width & color */
   }
+.text-stroke-black {
+    -webkit-text-stroke: 1px black; /* Border width & color */
+  }

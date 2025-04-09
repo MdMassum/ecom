@@ -1,31 +1,31 @@
 class ApiFeatures{
     constructor(query,querystr){
-        this.query = query;
+        this.query = query;   // Mongoose query (e.g. Product.find())
         this.querystr = querystr;
     }
     search(){
-        const keyword = this.querystr.keyword ?{
+
+        const keyword = this.querystr.searchKey ?{ 
             name:{
-                $regex: this.querystr.keyword,
+                $regex: this.querystr.searchKey,
                 $options:"i",  // this means case insensetive
             },
 
         }:{}
-        // console.log(keyword);
         this.query = this.query.find({...keyword}).populate('seller');
         return this;
     }
 
-    filter(){
+    filter(){ 
         // const queryCopy = this.querystr // but this.querystr is object and passed through reference so do->
         const queryCopy = {...this.querystr} // using spread operator
 
         // removing fields that are from search field and not require in filter
-        const removeFields = ["keyword","page","limit"];
+        const removeFields = ["searchKey","page","limit","sort","order"];
         removeFields.forEach((key)=>{delete queryCopy[key]});
-     
-        // filter for pricing and rating -->
+
         let querystr = JSON.stringify(queryCopy);
+        // console.log(querystr)
         querystr = querystr.replace(/\b(gt|lt|gte|lte)\b/g,(key)=>`$${key}`)    // basically changing from gt to $gt
         this.query = this.query.find(JSON.parse(querystr));
         // this.query = this.query.find(queryCopy);  // basically running find({category:" "});

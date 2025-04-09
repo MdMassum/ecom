@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { FiEdit, FiLoader, FiTrash2 } from 'react-icons/fi';
+import { FiEdit, FiLoader, FiTrash2, FiCopy } from 'react-icons/fi';
 import toast from "react-hot-toast";
 import UpdateUserModal from '../../components/UpdateUserModal';
 
@@ -91,12 +91,14 @@ function AllUsers() {
                   <button
                       onClick={() => setEditingUser(user)}
                       className="text-blue-500 hover:text-blue-700 focus:outline-none cursor-pointer"
+                      title='Edit User'
                     >
                       <FiEdit />
                     </button>
                     <button
                       onClick={() => handleDelete(user._id)}
                       className="text-red-500 hover:text-red-700 focus:outline-none cursor-pointer"
+                      title='Delete User'
                       disabled={deleting === user._id}
                     >
                       {deleting === user._id ? (
@@ -104,6 +106,16 @@ function AllUsers() {
                       ) : (
                         <FiTrash2 />
                       )}
+                    </button>
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(user._id);
+                        toast.success("User ID copied to clipboard!");
+                      }}
+                      className="text-gray-600 cursor-pointer hover:text-black focus:outline-none"
+                      title="Copy User ID"
+                    >
+                      <FiCopy />
                     </button>
                   </td>
                 </tr>

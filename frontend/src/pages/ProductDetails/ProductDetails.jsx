@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { FaShare } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import DataContent from "../components/DataContent";
+import DataContent from "./DataContent";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);

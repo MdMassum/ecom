@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Card from "../../components/admin/Card";
-// import AddProductModal from "../../components/admin/AddProductModal";
+import AddProductModal from "../../components/admin/AddProductModal";
 import axios from "axios";
 import { FiLoader } from "react-icons/fi";
 
 const AdminDashboard = () => {
 
   const [products, setProducts] = useState([]);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
 
   const fetchProduct = async () => {
@@ -37,13 +37,13 @@ const AdminDashboard = () => {
       <div className="flex items-center gap-10 mb-8 pr-10">
         <h1 className="text-3xl font-bold text-blue-900">All Products</h1>
 
-        {/* <button
+        <button
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg hover:opacity-90 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >
           Add Product
         </button>
-        {isOpen && <AddProductModal setIsOpen={setIsOpen} products={products} setProducts={setProducts} fetchProduct={fetchProduct} />} */}
+        {isOpen && <AddProductModal setIsOpen={setIsOpen} products={products} setProducts={setProducts} fetchProduct={fetchProduct} admin={true}/>}
       </div>
 
       {loading ? (

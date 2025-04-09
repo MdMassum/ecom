@@ -1,9 +1,9 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Login from "./pages/auth/Login";
+import Signup from "./pages/auth/Signup";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import SellerDashboard from "./pages/seller/SellerDashboard";
 import NotFound from "./pages/NotFound";
@@ -14,8 +14,9 @@ import AdminLayout from "./layout/DashboardLayout";
 import Profile from "./pages/Profile";
 import AllSellers from "./pages/admin/AllSellers";
 import AllUsers from "./pages/admin/AllUsers";
-import ProductDetails from "./pages/ProductDetails";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import UserAuthRoute from "./components/UserAuthRoute";
+import Search from "./pages/Search/Search";
 
 function Layout({ children }) {
   return (
@@ -34,6 +35,7 @@ function App() {
       {/* Public Routes */}
       <Route path="/" element={<Layout> <Home /> </Layout>}/>
       <Route path="/product/:id" element={<Layout> <ProductDetails /> </Layout>}/>
+      <Route path="/search" element={<Layout> <Search/> </Layout>}/>
       
       <Route element={<UserAuthRoute />}>
         <Route path="/me" element={<Layout> <Profile /> </Layout>}/>

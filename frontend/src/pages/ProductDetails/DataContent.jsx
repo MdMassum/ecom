@@ -12,6 +12,11 @@ function DataContent({product}) {
         </p>
         
         <p className="text-gray-700">
+          <span className="font-semibold text-black">Category - </span>
+          {product?.category}
+        </p>
+
+        <p className="text-gray-700">
           <span className="font-semibold text-black">Description - </span>
           {product?.description}
         </p>

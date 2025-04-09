@@ -1,8 +1,8 @@
 import { FaInstagram, FaFacebookF, FaWhatsapp, FaPhone } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 
-import contact from "../assets/contact1.png";
-import bgImage from "../assets/4.png";
+import contact from "../../../assets/contact1.png";
+import bgImage from "../../../assets/4.png";
 
 const Contact = () => {
   return (

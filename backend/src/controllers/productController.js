@@ -7,8 +7,8 @@ const cloudinary = require('../config/cloudinary')
 exports.createProduct = catchAsyncError(async(req,res) =>{
 
     // assigning value of req.body.user as the id of loggedin user (i.e id of logged in user will be req.user.id)
-    const seller = req.user.id;
-    const { name, description, price, stock } = req.body;
+    const seller = req.body.sellerId || req.user.id;
+    const { name, description, price, stock, category } = req.body;
 
     const images = req.files ? req.files.map((file) => file.path) : [];
 
@@ -19,7 +19,7 @@ exports.createProduct = catchAsyncError(async(req,res) =>{
         });
     }
 
-    const product = await Product.create({ name, description, price, seller, images, stock});
+    const product = await Product.create({ name, description, price, seller, images, stock, category});
 
     res.status(201).json({
         success:true,
@@ -29,22 +29,36 @@ exports.createProduct = catchAsyncError(async(req,res) =>{
 
 // for getting all products
 exports.getAllProducts = catchAsyncError(async(req,res) =>{
+    
+    const resultPerPage = req?.query?.limit || 20;
+    const currentPage = Number(req.query.page) || 1;
 
-    // const resultPerPage = 10;
-    const productCount = await Product.countDocuments();
+    if(req?.query?.category === 'all'){
+        req.query.category = { $in: ['Wooden', 'Pottery', 'Other', 'Mettalic', 'Handicrafts'] };
+    }
+
+    const apiFeaturesForCount = new ApiFeatures(Product.find(), req.query)
+        .search()
+        .filter();
+
+    const totalCount = await apiFeaturesForCount.query.clone().countDocuments();
 
     const apiFeatures = new ApiFeatures(Product.find(),req.query)
     .search()     // search function
     .filter()     // filter function on category,price,rating
-    // .pagination(resultPerPage);    // total result to show in 1 page
+    .pagination(resultPerPage);    // total result to show in 1 page
 
     // const products = await Product.find();  // now instead of this do below line due to search feature
     const products = await apiFeatures.query;
+    const totalPages = Math.ceil(totalCount / resultPerPage);
 
     res.status(200).json({
         success:true,
         products,
-        productCount
+        totalCount,
+        totalPages,
+        currentPage,
+        hasMore: currentPage < totalPages
     });
 })
 

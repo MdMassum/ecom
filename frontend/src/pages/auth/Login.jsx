@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import img from "../assets/loginImg.png";
+import img from "../../assets/loginImg.png";
 import { useDispatch } from 'react-redux';
-import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice';
+import { signInStart, signInSuccess, signInFailure } from '../../redux/user/userSlice';
 import toast from "react-hot-toast";
 
 

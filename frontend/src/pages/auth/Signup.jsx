@@ -6,9 +6,9 @@ import {
   signInStart,
   signInSuccess,
   signInFailure,
-} from "../redux/user/userSlice";
+} from "../../redux/user/userSlice";
 import { toast } from "react-hot-toast";
-import img from "../assets/loginImg.png";
+import img from "../../assets/loginImg.png";
 
 const Signup = () => {
   const { role } = useParams();

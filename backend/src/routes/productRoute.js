@@ -5,7 +5,7 @@ const router = express.Router();
 const upload = require('../middleware/fileUpload')
 
 // create product --> Admin access
-router.post('/product/new',isAuthenticatedUser,authorizeRoles("seller"),upload.array("images", 10),createProduct)
+router.post('/product/new',isAuthenticatedUser,authorizeRoles("seller","admin"),upload.array("images", 10),createProduct)
 
 // get single Product details
 router.get('/product/:id',getProductDetails);
