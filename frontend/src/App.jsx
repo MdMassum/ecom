@@ -20,6 +20,7 @@ import Search from "./pages/Search/Search";
 import Order from "./pages/Order/Order";
 import AllOrders from "./pages/admin/AllOrders";
 import AllSellerOrders from "./pages/seller/AllSellerOrders";
+import ScrollToTop from "./components/ScrollToTop";
 
 function Layout({ children }) {
   return (
@@ -34,6 +35,7 @@ function Layout({ children }) {
 function App() {
   return (
     <BrowserRouter>
+    <ScrollToTop />
     <Routes>
       {/* Public Routes */}
       <Route path="/" element={<Layout> <Home /> </Layout>}/>
