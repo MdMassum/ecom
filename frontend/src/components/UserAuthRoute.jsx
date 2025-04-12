@@ -13,6 +13,7 @@ const UserAuthRoute = () => {
   }, [currentUser]);
 
   if (!currentUser) {
+    toast.error("Please Login First !!")
     return <Navigate to="/login" />;
   }
 
