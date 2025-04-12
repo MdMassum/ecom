@@ -12,11 +12,11 @@ const Sidebar = () => {
       label: 'Products',
       href: '/seller/product',
     },
-    // {
-    //   icon: "#",
-    //   label: 'Enquiries',
-    //   href: '/admin/enquiries',
-    // }
+    {
+      icon: "#",
+      label: 'Orders',
+      href: '/seller/orders',
+    }
   ];
 
   const navigate = useNavigate();

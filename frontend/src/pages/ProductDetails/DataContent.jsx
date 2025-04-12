@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function DataContent({product}) {
-  console.log(product)
+ 
   return (
     <div className="w-full flex flex-col gap-6 md:gap-8 px-5 mb-6 md:mb-0 md:px-0">
       <div className="flex flex-col gap-4 text-lg">
@@ -32,9 +33,9 @@ function DataContent({product}) {
           
       </div>
 
-      <a href="#" className="w-44">
-        <button className="py-2 px-4 rounded-md bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold cursor-pointer hover:opacity-95">Enquire Now !!</button>
-      </a>
+      <Link to={`/order/${product._id}`} className="w-44">
+        <button className="py-2 px-4 rounded-md bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold cursor-pointer hover:opacity-95">Buy Now !!</button>
+      </Link>
     </div>
   );
 }

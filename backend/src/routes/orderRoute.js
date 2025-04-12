@@ -20,9 +20,9 @@ router.get('/seller/allOrders/:sellerId',isAuthenticatedUser,authorizeRoles("sel
 router.get('/admin/allOrders',isAuthenticatedUser,authorizeRoles("admin"),getAllOrders);
 
 // update order status - admin -->
-router.put('/admin/order/:id',isAuthenticatedUser,authorizeRoles("admin"),updateOrder)
+router.put('/admin/order/:id',isAuthenticatedUser,authorizeRoles("admin","seller"),updateOrder)
 
 // delete order - admin -->
-router.delete('/admin/order/:id',isAuthenticatedUser,authorizeRoles("admin"),deleteOrder)
+router.delete('/admin/order/:id',isAuthenticatedUser,authorizeRoles("admin","seller"),deleteOrder)
 
 module.exports = router;

@@ -13,7 +13,7 @@ const UserAuthRoute = () => {
   }, [currentUser]);
 
   if (!currentUser) {
-    return <Navigate to="/" />;
+    return <Navigate to="/login" />;
   }
 
   return currentUser.role === 'user' ? <Outlet /> : <p className='flex mt-20 justify-center items-center'>Access Denied !!</p>;

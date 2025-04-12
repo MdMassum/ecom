@@ -11,12 +11,15 @@ import AdminRoute from "./components/admin/AdminRoute";
 import SellerRoute from "./components/seller/SellerRoute";
 import SellerLayout from "./layout/SellerLayout";
 import AdminLayout from "./layout/DashboardLayout";
-import Profile from "./pages/Profile";
+import Profile from "./pages/Profile/Profile";
 import AllSellers from "./pages/admin/AllSellers";
 import AllUsers from "./pages/admin/AllUsers";
 import ProductDetails from "./pages/ProductDetails/ProductDetails";
 import UserAuthRoute from "./components/UserAuthRoute";
 import Search from "./pages/Search/Search";
+import Order from "./pages/Order/Order";
+import AllOrders from "./pages/admin/AllOrders";
+import AllSellerOrders from "./pages/seller/AllSellerOrders";
 
 function Layout({ children }) {
   return (
@@ -39,6 +42,7 @@ function App() {
       
       <Route element={<UserAuthRoute />}>
         <Route path="/me" element={<Layout> <Profile /> </Layout>}/>
+        <Route path="/order/:productId" element={<Layout> <Order /> </Layout>}/>
       </Route>
 
       
@@ -52,6 +56,7 @@ function App() {
           <Route path="/admin/product" element={<AdminDashboard />} />
           <Route path="/admin/sellers" element={<AllSellers />} />
           <Route path="/admin/users" element={<AllUsers />} />
+          <Route path="/admin/orders" element={<AllOrders />} />
           
         </Route>
       </Route>
@@ -60,6 +65,7 @@ function App() {
       <Route element={<SellerRoute/>}>
         <Route element={<SellerLayout />}>
           <Route path="/seller/product" element={<SellerDashboard />} />
+          <Route path="/seller/orders" element={<AllSellerOrders />} />
         </Route>
       </Route>
 

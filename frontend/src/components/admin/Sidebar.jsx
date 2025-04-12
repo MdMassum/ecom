@@ -21,6 +21,11 @@ const Sidebar = () => {
       icon: "#",
       label: 'Users',
       href: '/admin/users',
+    },
+    {
+      icon: "#",
+      label: 'Orders',
+      href: '/admin/orders',
     }
   ];
 

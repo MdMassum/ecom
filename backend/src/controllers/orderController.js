@@ -53,11 +53,8 @@ exports.getSingleOrder =catchAsyncError(async(req,res,next)=>{
 
 // get loggedIn user orders i.e myOrders -->
 exports.myOrders = catchAsyncError(async(req,res,next)=>{
-    const orders = await Order.find({user:req.user._id}).populate('seller',"name").populate('product');
+    const orders = await Order.find({user:req.user._id}).populate('product')
 
-    if(orders.length === 0){
-        return next(new Errorhandler(`Order not found with id ${req.params.id}`,404));
-    }
     res.status(200).json({
         success:true,
         orders
@@ -115,11 +112,11 @@ exports.updateOrder =catchAsyncError(async(req,res,next)=>{
     }
 
     order.orderStatus = req.body.status;
-    if(req.body.status === "Delivered"){
+    // if(req.body.status === "Delivered"){
         
-        await updateStock(ord.product,ord.quantity)
-        order.deliveredAt = Date.now();
-    }
+    //     await updateStock(order.product,order.quantity)
+    //     order.deliveredAt = Date.now();
+    // }
     await order.save({validateBeforeSave:false});
 
     res.status(200).json({

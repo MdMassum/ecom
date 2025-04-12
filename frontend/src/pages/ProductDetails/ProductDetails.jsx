@@ -4,6 +4,7 @@ import { FaShare } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import DataContent from "./DataContent";
+import axios from "axios";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
@@ -17,11 +18,10 @@ function ProductDetails() {
     const fetchProduct = async () => {
       try {
         setLoading(true);
-        const res = await fetch(
+        const {data} = await axios.get(
           `${import.meta.env.VITE_BASE_URL}/api/v1/product/${params.id}`,
           { withCredentials: true }
         );
-        const data = await res.json();
         if (data.success === false) {
           setError(true);
           setLoading(false);
