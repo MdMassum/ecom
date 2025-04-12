@@ -6,17 +6,22 @@ const orderSchema = new mongoose.Schema({
         ref : "User",
         required:true,
     },
-    seller:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref : "User",
-        required:true,
+    product: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+        required: true,
+    },
+    seller: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
+    },
+    quantity: {
+        type: Number,
+        required: true,
+        default: 1,
     },
     itemPrice:{
-        type:Number,
-        default:0,
-        required:true
-    },
-    taxPrice:{
         type:Number,
         default:0,
         required:true
@@ -49,65 +54,23 @@ const orderSchema = new mongoose.Schema({
             default:"India"
         },
         pincode:{
-            type:Number,
+            type:String,
             required:true
         },
         phoneNo:{
-            type:Number,
+            type:String,
             required:true
         }
     },
-    orderItems:[
-        {
-            product:{
-                type:mongoose.Schema.ObjectId,
-                ref:"Product",
-                required:true
-            },
-            name:{
-                type:String,
-                required:true
-            },
-            price:{
-                type:Number,
-                required:true
-            },
-            quantity:{
-                type:Number,
-                required:true
-            },
-            image:{
-                type:String,
-                required:true
-            },
-        },
-    ],
-    paymentInfo:{
-        id:{
-            type:String,
-            required:true
-        },
-        status:{
-            type:String,
-            required:true
-        },
-    },
-    paidAt:{
-        type:Date,
-        required:true
-    },
     orderStatus:{
         type:String,
+        enum: ["Processing", "Shipped", "Out for Delivery", "Delivered", "Cancelled", "Returned"],
         default:"Processing",
         required:true
     },
     deliveredAt:{
         type:Date,
-    },
-    createdAt:{
-        type:Date,
-        default:Date.now,
-    },
-})
+    }
+},{timestamps:true})
 
 module.exports = mongoose.model("Order",orderSchema);

@@ -1,6 +1,6 @@
 const express = require('express')
 const {isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
-const { newOrder, getSingleOrder, myOrders, getAllOrders, updateOrder, deleteOrder } = require('../controllers/orderController');
+const { newOrder, getSingleOrder, myOrders, getAllOrders, updateOrder, deleteOrder, getSellerOrders } = require('../controllers/orderController');
 
 const router = express.Router();
 
@@ -12,6 +12,9 @@ router.get('/order/:id',isAuthenticatedUser,getSingleOrder)
 
 //  get logged in user order i.e myOrders -->
 router.get('/orders/me',isAuthenticatedUser,myOrders);
+
+// get All orders - Seller  -->
+router.get('/seller/allOrders/:sellerId',isAuthenticatedUser,authorizeRoles("seller"),getSellerOrders);
 
 // get All orders - Admin  -->
 router.get('/admin/allOrders',isAuthenticatedUser,authorizeRoles("admin"),getAllOrders);

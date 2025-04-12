@@ -8,24 +8,23 @@ const catchAsyncError = require('../middleware/catchAsyncErrors')
 exports.newOrder = catchAsyncError(async(req,res,next)=>{
     const{
         shippingInfo,
-        orderItems,
-        paymentInfo,
         itemPrice,
-        taxPrice,
         shippingPrice,
         totalPrice,
+        quantity,
+        productId,
+        sellerId
     } = req.body;
 
     const order = await Order.create({
         shippingInfo,
-        orderItems,
-        paymentInfo,
         itemPrice,
-        taxPrice,
         shippingPrice,
         totalPrice,
-        paidAt:Date.now(),
-        user:req.user._id
+        quantity,
+        user:req.user._id,
+        product:productId,
+        seller:sellerId
     })
     res.status(201).json({
         success:true,
@@ -39,7 +38,9 @@ exports.getSingleOrder =catchAsyncError(async(req,res,next)=>{
     const order = await Order.findById(req.params.id).populate(
         "user",
         "name email",
-    )
+    ).populate(
+        "seller","name"
+    ).populate('product')
 
     if(!order){
         return next(new Errorhandler(`Order not found with id ${req.params.id}`,404));
@@ -51,10 +52,10 @@ exports.getSingleOrder =catchAsyncError(async(req,res,next)=>{
 })
 
 // get loggedIn user orders i.e myOrders -->
-exports.myOrders =catchAsyncError(async(req,res,next)=>{
-    const orders = await Order.find({user:req.user._id})
+exports.myOrders = catchAsyncError(async(req,res,next)=>{
+    const orders = await Order.find({user:req.user._id}).populate('seller',"name").populate('product');
 
-    if(!orders){
+    if(orders.length === 0){
         return next(new Errorhandler(`Order not found with id ${req.params.id}`,404));
     }
     res.status(200).json({
@@ -63,11 +64,30 @@ exports.myOrders =catchAsyncError(async(req,res,next)=>{
     })
 })
 
+// get All orders by seller - Seller -->
+exports.getSellerOrders =catchAsyncError(async(req,res,next)=>{
+    const orders = await Order.find({seller:req.params.sellerId}).populate('user','name').populate('seller',"name").populate('product');
+
+    if(orders.length === 0){
+        return next(new Errorhandler(`No orders found for seller `,404));
+    }
+    let totalAmount = 0;
+    orders.forEach((ord)=>{
+        totalAmount += ord.totalPrice;
+    })
+    res.status(200).json({
+        success:true,
+        totalResult:orders.length,
+        totalAmount,
+        orders
+    })
+})
+
 // get All orders - Admin -->
 exports.getAllOrders =catchAsyncError(async(req,res,next)=>{
-    const orders = await Order.find()
+    const orders = await Order.find().populate('user','name').populate('seller',"name").populate('product');
 
-    if(!orders){
+    if(orders.length === 0){
         return next(new Errorhandler(`Order not found `,404));
     }
     let totalAmount = 0;
@@ -96,11 +116,8 @@ exports.updateOrder =catchAsyncError(async(req,res,next)=>{
 
     order.orderStatus = req.body.status;
     if(req.body.status === "Delivered"){
-
-        order.orderItems.forEach(async(ord)=>{
-            await updateStock(ord.product,ord.quantity)
-        })
         
+        await updateStock(ord.product,ord.quantity)
         order.deliveredAt = Date.now();
     }
     await order.save({validateBeforeSave:false});
@@ -119,31 +136,17 @@ async function updateStock(id,quantity){
 
 }
 
-
-// get loggedIn user orders i.e myOrders -->
-exports.myOrders =catchAsyncError(async(req,res,next)=>{
-    const orders = await Order.find({user:req.user._id})
-
-    if(!orders){
-        return next(new Errorhandler(`Order not found with id ${req.params.id}`,404));
-    }
-    res.status(200).json({
-        success:true,
-        orders
-    })
-})
-
 // delete orders - Admin -->
 exports.deleteOrder =catchAsyncError(async(req,res,next)=>{
-    const order = await Order.findById(req.params.id)
 
-    if(!order){
-        return next(new Errorhandler(`Order not found `,404));
+    const order = await Order.findByIdAndDelete(req.params.id);
+
+    if (!order) {
+        return next(new Errorhandler(`Order not found`, 404));
     }
 
-    await Order.findByIdAndDelete(req.params.id);
     res.status(200).json({
         success:true,
-        message:"Order Deleted Succussfully"
+        message:"Order Deleted Successfully"
     })
 })
