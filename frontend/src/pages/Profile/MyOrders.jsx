@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
+import OrderCard from './OrderCard';
 
 function MyOrders() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -59,17 +60,7 @@ function MyOrders() {
 
           <div className='flex flex-col md:flex-row md:flex-wrap justify-center gap-4'>
             {displayedOrders.map((order) => (
-              <div
-                key={order._id}
-                className='w-full md:w-[45%] p-4 bg-gray-50 border border-gray-200 rounded-xl shadow-sm hover:shadow-md transition'
-              >
-                <p className='mb-1'><span className='font-semibold'>Order ID:</span> {order._id}</p>
-                <p className='mb-1'><span className='font-semibold'>Product:</span> {order.product.name}</p>
-                <p className='mb-1'><span className='font-semibold'>Status:</span> {order.orderStatus}</p>
-                <p className='mb-1'><span className='font-semibold'>Quantity:</span> {order.quantity}</p>
-                <p className='mb-1'><span className='font-semibold'>Total:</span> ₹{order.totalPrice}</p>
-                <p className='mb-1'><span className='font-semibold'>Ordered On:</span> {new Date(order.createdAt).toLocaleString()}</p>
-              </div>
+              <OrderCard key={order._id} order={order}/>
             ))}
           </div>
 

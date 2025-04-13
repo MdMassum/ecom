@@ -70,7 +70,7 @@ function MyInfo() {
 
         <button
           onClick={handleLogout}
-          className='mt-8 w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition-all duration-300 shadow-md'
+          className='mt-8 md:mt-16 w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600 transition-all duration-300 shadow-md cursor-pointer'
         >
           Logout
         </button>

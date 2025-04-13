@@ -51,6 +51,15 @@ const Order = () => {
     e.preventDefault();
     if (!product) return;
 
+    const { address, city, state, phoneNo, pincode } = shippingInfo;
+    const fields = { address, city, state, phoneNo, pincode };
+    for (const [key, value] of Object.entries(fields)) {
+      if (!value) {
+        toast.error(`${key} cannot be empty!`);
+        return;
+      }
+    }
+
     const itemPrice = product.price;
     const shippingPrice = 0;
     const totalPrice = itemPrice * quantity + shippingPrice;

@@ -13,6 +13,7 @@ export const navItems = [
   { label: "CONTACT US", href: "#contactUs" },
 ];
 
+
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -58,14 +59,14 @@ const Header = () => {
 
       {/* Mobile Nav */}
       {isOpen && (
-        <nav className="md:hidden bg-white bg-opacity-50 p-4 flex flex-col items-center space-y-4 shadow-md">
+        <nav className="md:hidden bg-gradient-to-r from-blue-100 to-blue-200 bg-opacity-50 p-4 flex flex-col items-center space-y-4 shadow-md">
           {navItems.map((navItem) =>
             navItem.href.startsWith("#") ? (
               <HashLink
                 key={navItem.label}
                 smooth
                 to={`/${navItem.href}`}
-                className="text-green-900 uppercase tracking-wide hover:text-green-700 transition"
+                className="text-blue-900 uppercase font-semibold tracking-wide hover:text-blue-700 transition"
                 onClick={() => setIsOpen(false)}
               >
                 {navItem.label}
@@ -74,13 +75,19 @@ const Header = () => {
               <a
                 key={navItem.label}
                 href={navItem.href}
-                className="text-green-900 uppercase tracking-wide hover:text-green-700 transition"
+                className="text-blue-900 uppercase font-semibold tracking-wide hover:text-blue-700 transition"
                 onClick={() => setIsOpen(false)}
               >
                 {navItem.label}
               </a>
             )
           )}
+          {(currentUser && currentUser.role === 'user') ? 
+            <a href='/me' className=" flex gap-1 items-center justify-center uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
+                <IoPersonCircle  size={28}/> My Profile 
+            </a> : <a href='/login' className="uppercase tracking-wide font-semibold text-blue-900 hover:text-black transition">
+                Login</a>
+              }
         </nav>
       )}
     </header>
