@@ -41,7 +41,7 @@ const AdminDashboard = () => {
 
   return (
     <div className="flex-1 flex-col px-4  min-h-screen">
-      <div className="flex items-center gap-10 mb-8 pr-10">
+      <div className="flex items-center gap-6 mb-8 pr-10">
         <h1 className="text-3xl font-bold text-blue-900">All Products</h1>
 
         <div>

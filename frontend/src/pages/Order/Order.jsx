@@ -4,6 +4,7 @@ import axios from "axios";
 import ContactForm from "./ContactForm";
 import OrderInfo from "./OrderInfo";
 import toast from "react-hot-toast";
+import Loader from "../../components/Loader";
 
 const Order = () => {
 
@@ -91,7 +92,7 @@ const Order = () => {
     }
   };
 
-  if (loading) return <p className="text-2xl text-center mt-28 min-h-screen">Loading product...</p>;
+  if (loading) return <div className="min-h-screen pt-20"><Loader/></div>
   if (!product) return <p className="text-2xl text-center mt-28 text-red-500 min-h-screen">Product not found!</p>;
 
   const shippingPrice = 0;

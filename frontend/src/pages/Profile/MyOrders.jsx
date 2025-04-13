@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import OrderCard from './OrderCard';
+import Loader from '../../components/Loader';
 
 function MyOrders() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -50,7 +51,8 @@ function MyOrders() {
       <h2 className='text-3xl font-bold text-center text-blue-900 mb-8'>My Orders</h2>
 
       {loading ? (
-        <p className='text-center'>Loading orders...</p>
+        <Loader/>
+        // <p className='text-center'>Loading orders...</p>
       ) : error ? (
         <p className='text-center text-red-600'>{error}</p>
       ) : orders.length === 0 ? (

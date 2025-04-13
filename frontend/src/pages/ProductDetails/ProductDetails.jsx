@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import DataContent from "./DataContent";
 import axios from "axios";
+import Loader from "../../components/Loader";
 
 function ProductDetails() {
   const [product, setProduct] = useState(null);
@@ -48,7 +49,7 @@ function ProductDetails() {
   };
   return (
     <main className="w-full mt-20 md:mt-24 min-h-96">
-      {loading && <p className="text-center mt-28 text-2xl">Loading...</p>}
+      {loading && <Loader/>}
       {error && (
         <p className="text-center mt-28 text-2xl">Something went wrong!</p>
       )}

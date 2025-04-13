@@ -23,10 +23,7 @@ function AllSellerOrders() {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/allOrders/${
-          currentSeller._id
-        }`,
-        {
+        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/allOrders/${currentSeller._id}?searchKey=${search}`,{
           withCredentials: true,
         }
       );
@@ -47,7 +44,7 @@ function AllSellerOrders() {
     setDeleting(id);
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/order/${id}?searchKey=${search}`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/order/${id}`,
         { withCredentials: true }
       );
       if (response?.data?.success) {
@@ -74,14 +71,14 @@ function AllSellerOrders() {
         <div className="flex items-center justify-between pr-10">
           <h1 className="text-3xl font-bold text-blue-600">All orders</h1>
         </div>
-        <div>
+        {/* <div>
           <SearchInput 
             value={search} 
             onChange={(e)=>setSearch(e.target.value)} 
             onClear={()=>setSearch("")}
             isLoading={loading}
           />
-        </div>
+        </div> */}
       </div>
 
       {loading ? (

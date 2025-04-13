@@ -14,6 +14,7 @@ const SellerDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
   
   const debouncedSearch = useDebounce(search, 500);
 
@@ -24,13 +25,12 @@ const SellerDashboard = () => {
     return;
   }
   const sellerId = currentUser._id;
-  console.log(sellerId)
 
   const fetchProduct = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/products/${sellerId}?searchKey=${search}`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/products/${sellerId}?searchKey=${search}&category=${category}`,
         { withCredentials: true }
       );
 
@@ -46,11 +46,11 @@ const SellerDashboard = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, [debouncedSearch]);
+  }, [debouncedSearch,category]);
 
   return (
     <div className="flex-1 flex-col px-4  min-h-screen">
-      <div className="flex items-center gap-10 mb-8 pr-10">
+      <div className="flex items-center gap-6 mb-8 pr-10">
         <h1 className="text-3xl font-bold text-[#4a5396]">My Products</h1>
 
         <div>
@@ -61,8 +61,23 @@ const SellerDashboard = () => {
             isLoading={loading}
           />
         </div>
+        <div className="flex flex-col w-40 gap-1">
+          <select
+            id="category"
+            className="rounded-lg border p-2 w-full"
+            onChange={(e)=>setCategory(e.target.value)}
+            value={category}
+          >
+            <option value="all">Select Category</option>
+            <option value="Pottery">Pottery</option>
+            <option value="Wooden">Wooden</option>
+            <option value="Mettalic">Mettalic</option>
+            <option value="Handicrafts">Handicrafts</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
 
-        <button
+        <button 
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg hover:opacity-90 cursor-pointer"
           onClick={() => setIsOpen(!isOpen)}
         >

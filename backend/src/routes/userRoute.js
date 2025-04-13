@@ -1,19 +1,21 @@
 const express = require('express');
 const { registerUser, loginUser, logout, forgotPassword, resetPassword, getUserDetails, updatePassword, updateProfile, getAllUser, getSingleUser, updateUserRole, deleteUser, getAllSeller } = require('../controllers/userController');
 const { isAuthenticatedUser, authorizeRoles } = require('../middleware/auth');
+const rateLimiter = require('../utils/rateLimit');
 const router = express.Router();
 
+
 // for creating user -->
-router.post('/register',registerUser)
+router.post('/register',rateLimiter,registerUser)
 
 // for user login -->
-router.post('/login',loginUser)
+router.post('/login',rateLimiter,loginUser)
 
 // for password forgot -->
-router.post('/password/forgot',forgotPassword)
+router.post('/password/forgot',rateLimiter,forgotPassword)
 
 // for password reset page -->
-router.put('/password/reset/:token',resetPassword)
+router.put('/password/reset/:token',rateLimiter,resetPassword)
 
 // for user logout -->
 router.get('/logout',logout)

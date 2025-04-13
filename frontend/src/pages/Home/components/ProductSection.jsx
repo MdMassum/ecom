@@ -3,6 +3,7 @@ import bgImage from '../../../assets/4.png';
 import ProductCard from '../../../components/ProductCard';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Loader from '../../../components/Loader';
 
 const categories = ["Pottery", "Wooden", "Mettalic", "Handicrafts"];
 
@@ -59,7 +60,7 @@ function ProductSection() {
 
       <div className='relative z-30 pb-8'>
         {loading ? (
-          <div className='text-center text-xl font-semibold text-gray-700'>Loading...</div>
+          <Loader/>
         ) : (
           categories.map(category => (
             groupedProducts[category]?.length > 0 && (

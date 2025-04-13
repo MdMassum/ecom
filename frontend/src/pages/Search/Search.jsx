@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import ProductCard from "../../components/ProductCard";
-import { FaSpinner } from "react-icons/fa";
+import Loader from "../../components/Loader";
+
 
 function Search() {
   const [sideBarData, setSideBarData] = useState({
@@ -153,11 +154,7 @@ function Search() {
                 No Product Found !!
               </p>
             )}
-            {loading && (
-              <div className="w-full flex justify-center my-10">
-                <FaSpinner className="animate-spin text-4xl text-blue-600" />
-              </div>
-            )}
+            {loading && <Loader/>}
             {!loading &&
               products.length > 0 &&
               products.map((product) => (

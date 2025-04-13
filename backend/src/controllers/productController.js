@@ -70,6 +70,10 @@ exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
         return next(new Errorhandler("Seller ID is required", 400));
     }
 
+    if(req?.query?.category === 'all'){
+        req.query.category = { $in: ['Wooden', 'Pottery', 'Other', 'Mettalic', 'Handicrafts'] };
+    }
+
     const productCount = await Product.countDocuments({ seller: sellerId });
 
     const apiFeatures = new ApiFeatures(Product.find({ seller: sellerId }), req.query,['seller'])
