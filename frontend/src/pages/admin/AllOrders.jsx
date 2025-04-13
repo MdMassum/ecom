@@ -3,14 +3,18 @@ import axios from "axios";
 import { FiLoader, FiTrash2, FiEdit, FiCopy } from "react-icons/fi";
 import toast from "react-hot-toast";
 import UpdateOrderModal from "../../components/seller/updateOrderModal";
+import SearchInput from "../../components/SearchInput";
+import useDebounce from "../../hooks/useDebounce";
 
 function AllOrders() {
+
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
   const [editingorder, setEditingorder] = useState(null);
+  const [search, setSearch] = useState("")
 
-  console.log(orders);
+  const debouncedSearch = useDebounce(search, 500);
 
   const fetchOrders = async () => {
     setLoading(true);
@@ -38,7 +42,7 @@ function AllOrders() {
     setDeleting(id);
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/order/${id}`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/order/${id}?searchKey=${search}`,
         { withCredentials: true }
       );
       if (response?.data?.success) {
@@ -57,13 +61,21 @@ function AllOrders() {
 
   useEffect(() => {
     fetchOrders();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-1 flex-col min-h-screen">
-      <div className="flex justify-between">
-        <div className="flex items-center justify-between mb-4 mt-2 pr-10">
+      <div className="flex items-center gap-3  mb-4 mt-2">
+        <div className="flex items-center justify-between pr-10">
           <h1 className="text-3xl font-bold text-blue-600">All orders</h1>
+        </div>
+        <div>
+          <SearchInput 
+            value={search} 
+            onChange={(e)=>setSearch(e.target.value)} 
+            onClear={()=>setSearch("")}
+            isLoading={loading}
+          />
         </div>
       </div>
 

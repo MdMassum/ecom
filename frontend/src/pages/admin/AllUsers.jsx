@@ -3,6 +3,8 @@ import axios from 'axios';
 import { FiEdit, FiLoader, FiTrash2, FiCopy } from 'react-icons/fi';
 import toast from "react-hot-toast";
 import UpdateUserModal from '../../components/UpdateUserModal';
+import useDebounce from '../../hooks/useDebounce';
+import SearchInput from '../../components/SearchInput';
 
 function AllUsers() {
 
@@ -10,11 +12,14 @@ function AllUsers() {
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
   const [editingUser, setEditingUser] = useState(null);
+  const [search, setSearch] = useState("");
+
+  const debouncedSearch = useDebounce(search, 500);
 
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/admin/users`, {
+      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/api/v1/admin/users?searchKey=${search}`, {
         withCredentials: true
       });
       console.log(response)
@@ -50,16 +55,23 @@ function AllUsers() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-1 flex-col px-4 min-h-screen">
 
-      <div className='flex justify-between'>
-
-      <div className="flex items-center justify-between mb-4 mt-2 pr-10">
+      <div className='flex items-center gap-3 mb-4 mt-2'>
+      <div className="flex items-center justify-between  pr-10">
         <h1 className="text-3xl font-bold text-blue-600">All users</h1>
       </div>
+      <div>
+          <SearchInput 
+            value={search} 
+            onChange={(e)=>setSearch(e.target.value)} 
+            onClear={()=>setSearch("")}
+            isLoading={loading}
+          />
+        </div>
       </div> 
 
       {loading ? (

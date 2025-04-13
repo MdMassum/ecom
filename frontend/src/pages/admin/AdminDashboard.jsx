@@ -3,18 +3,24 @@ import Card from "../../components/admin/Card";
 import AddProductModal from "../../components/admin/AddProductModal";
 import axios from "axios";
 import { FiLoader } from "react-icons/fi";
+import SearchInput from "../../components/SearchInput";
+import useDebounce from "../../hooks/useDebounce";
 
 const AdminDashboard = () => {
 
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  
+  const debouncedSearch = useDebounce(search, 500);
+
 
   const fetchProduct = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/products`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/products?searchKey=${search}`,
         { withCredentials: true }
       );
 
@@ -30,12 +36,21 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-1 flex-col px-4  min-h-screen">
       <div className="flex items-center gap-10 mb-8 pr-10">
         <h1 className="text-3xl font-bold text-blue-900">All Products</h1>
+
+        <div>
+          <SearchInput 
+            value={search} 
+            onChange={(e)=>setSearch(e.target.value)} 
+            onClear={()=>setSearch("")}
+            isLoading={loading}
+          />
+        </div>
 
         <button
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg hover:opacity-90 cursor-pointer"

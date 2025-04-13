@@ -5,12 +5,17 @@ import axios from "axios";
 import { FiLoader } from "react-icons/fi";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import useDebounce from "../../hooks/useDebounce";
+import SearchInput from "../../components/SearchInput";
 
 const SellerDashboard = () => {
 
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
+  
+  const debouncedSearch = useDebounce(search, 500);
 
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -25,7 +30,7 @@ const SellerDashboard = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/products/${sellerId}`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/seller/products/${sellerId}?searchKey=${search}`,
         { withCredentials: true }
       );
 
@@ -41,12 +46,21 @@ const SellerDashboard = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-1 flex-col px-4  min-h-screen">
       <div className="flex items-center gap-10 mb-8 pr-10">
         <h1 className="text-3xl font-bold text-[#4a5396]">My Products</h1>
+
+        <div>
+          <SearchInput 
+            value={search} 
+            onChange={(e)=>setSearch(e.target.value)} 
+            onClear={()=>setSearch("")}
+            isLoading={loading}
+          />
+        </div>
 
         <button
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg hover:opacity-90 cursor-pointer"

@@ -4,18 +4,23 @@ import { FiLoader, FiTrash2, FiEdit, FiCopy } from "react-icons/fi";
 import toast from "react-hot-toast";
 
 import UpdateUserModal from "../../components/UpdateUserModal";
+import SearchInput from "../../components/SearchInput";
+import useDebounce from "../../hooks/useDebounce";
 
 function AllSellers() {
   const [sellers, setSellers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(null);
   const [editingSeller, setEditingSeller] = useState(null);
+  const [search, setSearch] = useState("");
+
+  const debouncedSearch = useDebounce(search,500);
 
   const fetchSellers = async () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/sellers`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/admin/sellers?searchKey=${search}`,
         {
           withCredentials: true,
         }
@@ -56,13 +61,21 @@ function AllSellers() {
 
   useEffect(() => {
     fetchSellers();
-  }, []);
+  }, [debouncedSearch]);
 
   return (
     <div className="flex-1 flex-col min-h-screen">
-      <div className="flex justify-between">
-        <div className="flex items-center justify-between mb-4 mt-2 pr-10">
+      <div className="flex items-center gap-3 mb-4 mt-2">
+        <div className="flex items-center justify-between pr-10">
           <h1 className="text-3xl font-bold text-blue-600">All Sellers</h1>
+        </div>
+        <div>
+          <SearchInput 
+            value={search} 
+            onChange={(e)=>setSearch(e.target.value)} 
+            onClear={()=>setSearch("")}
+            isLoading={loading}
+          />
         </div>
       </div>
 
