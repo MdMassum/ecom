@@ -1,18 +1,35 @@
 class ApiFeatures{
-    constructor(query,querystr){
+    constructor(query, querystr, populateFields = []){
         this.query = query;   // Mongoose query (e.g. Product.find())
-        this.querystr = querystr;
+        this.querystr = querystr;  // searchKey
+        this.populateFields = populateFields;
     }
     search(){
 
-        const keyword = this.querystr.searchKey ?{ 
-            name:{
-                $regex: this.querystr.searchKey,
-                $options:"i",  // this means case insensetive
-            },
-
+        const searchKey = this.querystr.searchKey
+        const keyword = searchKey ?{
+            
+            $or: [
+                { name: 
+                    { $regex: searchKey, $options: "i" } 
+                },
+                { description:
+                    { $regex: searchKey, $options:"i",} 
+                },
+                { email:
+                    { $regex: searchKey, $options:"i",} 
+                },
+                { phone:
+                    { $regex: searchKey, $options:"i",} 
+                }
+            ]
         }:{}
-        this.query = this.query.find({...keyword}).populate('seller');
+
+        this.query = this.query.find(keyword);
+        this.populateFields.forEach(field => {   // dynamically populate
+            this.query = this.query.populate(field);
+        });
+    
         return this;
     }
 

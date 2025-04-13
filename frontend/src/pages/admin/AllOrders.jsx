@@ -69,14 +69,14 @@ function AllOrders() {
         <div className="flex items-center justify-between pr-10">
           <h1 className="text-3xl font-bold text-blue-600">All orders</h1>
         </div>
-        <div>
+        {/* <div>
           <SearchInput 
             value={search} 
             onChange={(e)=>setSearch(e.target.value)} 
             onClear={()=>setSearch("")}
             isLoading={loading}
           />
-        </div>
+        </div> */}
       </div>
 
       {loading ? (

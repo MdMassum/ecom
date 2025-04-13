@@ -12,6 +12,7 @@ const AdminDashboard = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
   
   const debouncedSearch = useDebounce(search, 500);
 
@@ -20,7 +21,7 @@ const AdminDashboard = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/api/v1/products?searchKey=${search}`,
+        `${import.meta.env.VITE_BASE_URL}/api/v1/products?searchKey=${search}&category=${category}`,
         { withCredentials: true }
       );
 
@@ -36,7 +37,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     fetchProduct();
-  }, [debouncedSearch]);
+  }, [debouncedSearch,category]);
 
   return (
     <div className="flex-1 flex-col px-4  min-h-screen">
@@ -51,6 +52,22 @@ const AdminDashboard = () => {
             isLoading={loading}
           />
         </div>
+
+        <div className="flex flex-col w-40 gap-1">
+              <select
+                id="category"
+                className="rounded-lg border p-2 w-full"
+                onChange={(e)=>setCategory(e.target.value)}
+                value={category}
+              >
+                <option value="all">Select Category</option>
+                <option value="Pottery">Pottery</option>
+                <option value="Wooden">Wooden</option>
+                <option value="Mettalic">Mettalic</option>
+                <option value="Handicrafts">Handicrafts</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
 
         <button
           className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-3 py-2 rounded-lg hover:opacity-90 cursor-pointer"

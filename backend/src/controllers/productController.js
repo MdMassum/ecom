@@ -37,13 +37,13 @@ exports.getAllProducts = catchAsyncError(async(req,res) =>{
         req.query.category = { $in: ['Wooden', 'Pottery', 'Other', 'Mettalic', 'Handicrafts'] };
     }
 
-    const apiFeaturesForCount = new ApiFeatures(Product.find(), req.query)
+    const apiFeaturesForCount = new ApiFeatures(Product.find(), req.query,['seller'])
         .search()
         .filter();
 
     const totalCount = await apiFeaturesForCount.query.clone().countDocuments();
 
-    const apiFeatures = new ApiFeatures(Product.find(),req.query)
+    const apiFeatures = new ApiFeatures(Product.find(),req.query,['seller'])
     .search()     // search function
     .filter()     // filter function on category,price,rating
     .pagination(resultPerPage);    // total result to show in 1 page
@@ -72,7 +72,7 @@ exports.getSellerProducts = catchAsyncError(async (req, res, next) => {
 
     const productCount = await Product.countDocuments({ seller: sellerId });
 
-    const apiFeatures = new ApiFeatures(Product.find({ seller: sellerId }), req.query)
+    const apiFeatures = new ApiFeatures(Product.find({ seller: sellerId }), req.query,['seller'])
         .search()    // Apply search function
         .filter();   // Apply filters (category, price, rating)
 
