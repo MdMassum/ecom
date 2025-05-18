@@ -24,7 +24,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-gradient-to-r from-blue-700 to-blue-900 text-white py-10 px-5 md:px-12 lg:px-24">
+    <footer className="bg-gradient-to-b from-blue-700 to-blue-800 text-white py-10 px-5 md:px-12 lg:px-24">
       <div className="grid md:grid-cols-3 md:gap-48 lg:gap-56">
         {/* First Column - Address */}
         <div className="flex flex-col space-y-2 md:min-w-88 lg:min-w-96">
@@ -33,7 +33,7 @@ export default function Footer() {
             <FaMapMarkerAlt className="text-xl" />
             <div>
               <p className="text-sm">
-                Shop No 8 (1st floor), Gayatri Market, Jhokan Bagh,
+                Shop No 8 (1st floor), Gayatri Market,
               </p>
               <p className="text-sm">Jhansi, UP, India 284001</p>
             </div>

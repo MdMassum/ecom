@@ -1,10 +1,11 @@
 import React from "react";
+import defaultProd from '../assets/defaultProd.png'
 
 function ProductCard({ product }) {
   return (
     <div className="bg-blue-800 text-white rounded-xl p-3 pb-5 w-80 md:w-64 shadow-lg hover:scale-105 transition-transform">
       <div className="bg-gradient-to-b from-blue-200 to-green-200 h-56 rounded-lg mb-4 overflow-hidden">
-        <img src={product?.images[0]} alt={product?.name} className="w-full h-full object-cover" />
+        <img src={product?.images[0] || defaultProd} alt={product?.name} className="w-full h-full object-cover" />
       </div>
       <div className="flex justify-between font-bold text-lg">
         <span>{product?.name}</span>

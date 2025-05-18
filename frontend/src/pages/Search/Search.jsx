@@ -143,11 +143,11 @@ function Search() {
         </div>
 
         {/* Product List */}
-        <div className="flex-1 px-7 py-4">
+        <div className="flex-1 md:px-7 py-4 w-full">
           <h1 className="text-3xl font-semibold border-b px-3 py-1 mb-6 text-blue-900 ">
             Product results:
           </h1>
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap gap-8 justify-center items-center">
             {!loading && products.length === 0 && (
               <p className="text-xl text-slate-700 m-auto dark:text-gray-400">
                 {" "}

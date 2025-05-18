@@ -66,8 +66,8 @@ function ProductSection() {
             groupedProducts[category]?.length > 0 && (
               <div key={category} className='mb-12 px-6'>
                 <div className='flex justify-between items-center mb-4 md:mx-10'>
-                <h2 className='text-3xl md:text-4xl font-bold  text-blue-900 text-stroke'>{category} Section</h2>
-                <Link to={`/search?category=${category}`} className='cursor-pointer py-2 px-4 bg-blue-900 text-white rounded-lg hover:bg-blue-950 hover:opacity-90'>See More..</Link>
+                <h2 className='text-2xl md:text-4xl font-bold  text-blue-900 md:text-stroke'>{category} Section</h2>
+                <Link to={`/search?category=${category}`} className='min-w-24 cursor-pointer px-2 py-2 md:px-4 bg-blue-900 text-white rounded-lg hover:bg-blue-950 hover:opacity-90'>See More..</Link>
                 </div>
                 
                 <div className='flex flex-wrap justify-center gap-10'>
