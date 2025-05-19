@@ -10,7 +10,7 @@ function SearchSection() {
     const navigate = useNavigate()
     console.log(search)
   return (
-    <div id="aboutUs" className="w-full relative min-h-screen md:min-h-screen overflow-hidden flex  text-center">
+    <div id="aboutUs" className="w-full relative min-h-[703px] md:min-h-screen overflow-hidden flex  text-center">
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full bg-cover bg-center">
         <img
