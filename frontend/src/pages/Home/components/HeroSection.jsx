@@ -6,7 +6,7 @@ import man from "../../../assets/9.png";
 
 function HeroSection() {
   return (
-    <div id="home" className="relative w-full min-h-[703px] md:min-h-screen overflow-hidden">
+    <div id="home" className="relative w-full min-h-[685px] md:min-h-screen overflow-hidden">
       <div className="absolute inset-0 w-full h-full bg-cover bg-center">
         <img
           src={bgImage}
@@ -19,7 +19,7 @@ function HeroSection() {
         <img src={logo} alt="" className="w-full" />
       </div>
 
-      <div className="absolute w-[120%] md:w-[60%] lg:w-[45%] bottom-0 -right-10 md:right-12 z-50">
+      <div className="absolute w-[110%] md:w-[60%] lg:w-[45%] bottom-0 -right-6 md:right-12 z-50">
         <img src={man} alt="" className="w-full" />
       </div>
 

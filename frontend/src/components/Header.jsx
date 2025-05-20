@@ -22,9 +22,9 @@ const Header = () => {
   },[currentUser])
 
   return (
-    <header className="absolute top-0 left-0 w-full bg-white/20 shadow-sm z-50">
+    <header className="absolute top-0 left-0 w-full bg-white/20 shadow-sm z-50 backdrop-blur-md">
       <div className="max-w-[84%] mx-auto flex items-center justify-between py-5">
-        <div className="flex gap-2 pr-2 -ml-4 md:ml-0 text-2xl md:text-3xl">
+        <div className="flex gap-2 pr-2 -ml-4 md:ml-0 text-xl md:text-3xl">
           <span className=" text-black">THE</span>
           <span className="font-bold text-orange-400">VOCAL</span>
           <span className="font-bold text-blue-800">FOR</span>

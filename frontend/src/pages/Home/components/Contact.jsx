@@ -1,7 +1,7 @@
 import { FaInstagram, FaFacebookF, FaWhatsapp, FaPhone } from "react-icons/fa";
 import { MdAttachEmail } from "react-icons/md";
 
-import contact from "../../../assets/contact1.png";
+import contact from "../../../assets/contact3.png";
 import bgImage from "../../../assets/4.png";
 
 const Contact = () => {
@@ -9,7 +9,7 @@ const Contact = () => {
 
     <div
       id="contactUs"
-      className="relative w-full md:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-3 md:py-6 overflow-hidden min-h-[667px] md:min-h-screen"
+      className="relative w-full md:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-3 md:py-6 overflow-hidden min-h-[667px] md:min-h-screen -mt-7"
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full bg-cover bg-center z-0">
