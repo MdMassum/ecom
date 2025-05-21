@@ -9,7 +9,7 @@ const Contact = () => {
 
     <div
       id="contactUs"
-      className="relative w-full md:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-3 md:py-6 overflow-hidden min-h-[667px] md:min-h-screen -mt-7"
+      className="relative w-full lg:pl-28 flex flex-col md:flex-row mx-auto p-5 items-center justify-between md:gap-0 gap-3 md:py-6 overflow-hidden min-h-[667px] md:min-h-screen -mt-7"
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full bg-cover bg-center z-0">
@@ -17,12 +17,12 @@ const Contact = () => {
       </div>
 
       {/* Contact Image Section */}
-      <div className="relative flex items-center justify-center w-92 md:min-w-[550px]">
+      <div className="relative flex items-center justify-center w-92 md:min-w-[450px] lg:min-w-[550px] pt-5 md:pt-0">
         <img src={contact} alt="Contact" className="w-full" />
       </div>
 
       {/* Contact Details Section */}
-      <div className="relative md:ml-28 z-10 flex flex-col w-full text-blue-900 text-left">
+      <div className="relative lg:ml-28 md:ml-10 z-10 flex flex-col w-full text-blue-900 text-left">
         <div className="w-full flex items-center mb-7 md:mb-12">
           <div className="flex flex-row md:flex-col tracking-wider items-center justify-center md:justify-start gap-2 md:gap-0 font-bold">
             <h2 className="text-5xl md:text-8xl text-left md:-ml-8 text-stroke">Get in</h2>
